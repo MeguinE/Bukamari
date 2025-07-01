@@ -1,0 +1,6 @@
+[
+  { "id": 1, "pedidos": [], "clientes": 2 },
+  { "id": 2, "pedidos": [], "clientes": 4 },
+  { "id": 3, "pedidos": [{ "producto": "Pizza", "precio": 20 }], "clientes": 1 },
+  { "id": 4, "pedidos": [], "clientes": 3 }
+]

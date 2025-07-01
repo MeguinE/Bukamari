@@ -3,51 +3,96 @@ import HeaderHome from './HeaderHome';
 import HomeContent from './HomeContent';
 
 export default function HomeWrapper() {
-    const [fecha, setFecha] = useState('');
-    const [mesas, setMesas] = useState([
-        { id: 1, pedidos: [], clientes: 2 },
-        { id: 2, pedidos: [], clientes: 4 },
-        { id: 3, pedidos: [{ producto: 'Pizza', precio: 20 }], clientes: 1 },
-        { id: 4, pedidos: [], clientes: 3 },
-    ]);
+  const modoDemo = true; // ⚠️ Cambia a false para producción
 
-    const [mesaSeleccionada, setMesaSeleccionada] = useState(null);
+  const [fecha, setFecha] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [mesas, setMesas] = useState([]);
+  const [mesaSeleccionada, setMesaSeleccionada] = useState(null);
 
-    useEffect(() => {
-        const ahora = new Date();
-        const opciones = {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-        };
-        setFecha(ahora.toLocaleString('es-ES', opciones));
-    }, []);
-
-    const agregarMesa = () => {
-        const nueva = {
-            id: `T${mesas.length + 1}`,
-            pedidos: [],
-            clientes: 0
-        };
-        setMesas([...mesas, nueva]);
+  useEffect(() => {
+    const ahora = new Date();
+    const opciones = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
     };
-    const seleccionarMesa = (id) => {
-        setMesaSeleccionada(id);
+    setFecha(ahora.toLocaleString('es-ES', opciones));
+  }, []);
+
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+
+    const url = modoDemo
+      ? '/mesas.json'
+      : 'https://tuservidor.com/api/mesas';
+
+    fetch(url)
+      .then(res => {
+        if (!res.ok) throw new Error('Error en la respuesta del servidor');
+        return res.json();
+      })
+      .then(data => setMesas(data))
+      .catch(err => {
+        console.error('Error cargando mesas:', err);
+        setError('Error al cargar las mesas. Intenta de nuevo.');
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  const agregarMesa = async () => {
+    const nueva = {
+      id: `T${mesas.length + 1}`,
+      pedidos: [],
+      clientes: 0
     };
 
-    const mesaActiva = mesas.find(m => m.id === mesaSeleccionada);
+    try {
+      setLoading(true);
+      setError(null);
 
-    return (
-        <>
-            <HeaderHome fecha={fecha} onAddMesa={agregarMesa} />
-            <HomeContent
-                mesas={mesas}
-                seleccionarMesa={seleccionarMesa}
-                mesaSeleccionada={mesaSeleccionada}
-                mesaActiva={mesaActiva}
-            />
-        </>
-    );
+      if (modoDemo) {
+        setMesas(prev => [...prev, nueva]);
+      } else {
+        const res = await fetch('https://tuservidor.com/api/mesas', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(nueva)
+        });
+        if (!res.ok) throw new Error('Error creando la mesa');
+        const creada = await res.json();
+        setMesas(prev => [...prev, creada]);
+      }
+
+    } catch (err) {
+      console.error(err);
+      setError('No se pudo crear la mesa.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const seleccionarMesa = (id) => {
+    setMesaSeleccionada(id);
+  };
+
+  const mesaActiva = mesas.find(m => m.id === mesaSeleccionada);
+
+  return (
+    <>
+      <HeaderHome fecha={fecha} onAddMesa={agregarMesa} />
+      <HomeContent
+        mesas={mesas}
+        seleccionarMesa={seleccionarMesa}
+        mesaSeleccionada={mesaSeleccionada}
+        mesaActiva={mesaActiva}
+        loading={loading}
+        error={error}
+      />
+    </>
+  );
 }

@@ -1,0 +1,10 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HeaderSimple from "../components/HeaderSimple.jsx";
+import MenuWrapper from "../components/MenuWrapper.jsx"; // Este será el React con estado
+---
+
+<Layout>
+  <HeaderSimple slot="header" />
+  <MenuWrapper client:only="react" />
+</Layout>

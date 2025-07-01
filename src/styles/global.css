@@ -1,1 +1,10 @@
 @import "tailwindcss";
+/* @import "tailwindcss/components"; */
+@import "tailwindcss/utilities";
+
+@plugin "@midudev/tailwind-animations";
+
+
+:root{
+    --prueba: #C8D2D1;
+}
