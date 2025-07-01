@@ -11,6 +11,7 @@ export default function HomeWrapper() {
   const [mesas, setMesas] = useState([]);
   const [mesaSeleccionada, setMesaSeleccionada] = useState(null);
 
+  // Cargar fecha actual
   useEffect(() => {
     const ahora = new Date();
     const opciones = {
@@ -23,6 +24,7 @@ export default function HomeWrapper() {
     setFecha(ahora.toLocaleString('es-ES', opciones));
   }, []);
 
+  // Cargar mesas y fusionar pedidos desde localStorage
   useEffect(() => {
     setLoading(true);
     setError(null);
@@ -36,7 +38,17 @@ export default function HomeWrapper() {
         if (!res.ok) throw new Error('Error en la respuesta del servidor');
         return res.json();
       })
-      .then(data => setMesas(data))
+      .then(data => {
+        // 🔸 Aquí fusionamos con localStorage
+        const dataConPedidos = data.map(mesa => {
+          const stored = localStorage.getItem(`pedido_${mesa.id}`);
+          return {
+            ...mesa,
+            pedidos: stored ? JSON.parse(stored) : mesa.pedidos
+          };
+        });
+        setMesas(dataConPedidos);
+      })
       .catch(err => {
         console.error('Error cargando mesas:', err);
         setError('Error al cargar las mesas. Intenta de nuevo.');
