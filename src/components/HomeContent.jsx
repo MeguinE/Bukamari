@@ -37,7 +37,7 @@ export default function HomeContent({
                             <img
                                 src="src/assets/mesa-redonda.webp"
                                 alt={`Mesa ${mesa.id}`}
-                                className="absolute inset-0 w-full h-full object-contain opacity-70"
+                                className="absolute inset-0 w-full h-full object-contain opacity-70 animate-tada"
                             />
                             {/* Número de la mesa */}
                             <span className="z-10 text-lg font-semibold text-gray-800">
