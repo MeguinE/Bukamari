@@ -4,8 +4,9 @@ export default function MenuView({
   productos,         // Lista de productos disponibles para agregar
   agregarProducto,   // Función que se ejecuta al agregar un producto al pedido
   pedidos,           // Lista de productos que ya se han agregado al pedido
-  finalizarPedido    // Función que se ejecuta al finalizar el pedido
+  finalizarPedido,    // Función que se ejecuta al finalizar el pedido          // Texto de búsqueda (no se usa en este componente, pero puede ser útil para filtrar productos)
 }) {
+ 
   return (
     <main className="grid grid-cols-4 gap-4 w-full h-full p-6">
 
@@ -49,7 +50,7 @@ export default function MenuView({
         </div>
       </div>
 
-     {/* Barra lateral derecha: resumen del pedido actual */}
+      {/* Barra lateral derecha: resumen del pedido actual */}
       <div className="col-span-1 bg-white rounded shadow p-4 flex flex-col justify-between">
         <div>
           {/* Información de la mesa */}
@@ -80,8 +81,6 @@ export default function MenuView({
             </p>
           )}
         </div>
-
-
         {/* Botón para finalizar el pedido */}
         <button
           onClick={finalizarPedido}
