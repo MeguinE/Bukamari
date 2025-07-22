@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import MenuView from "./MenuView.jsx";
+import { actualizarEstadoMesaEnStorage } from '../utils/helpers.js';
 
 export default function MenuWrapper() {
   const [mesaId, setMesaId] = useState(null);
@@ -85,15 +86,25 @@ export default function MenuWrapper() {
         };
         const nuevoPedido = [...pedidos, nuevoItem];
         setPedidos(nuevoPedido);
-        localStorage.setItem(`pedido_${mesaId}`, JSON.stringify(nuevoPedido));
+        
+        // Actualizar estado de mesa automáticamente
+        actualizarEstadoMesaEnStorage(mesaId, nuevoPedido);
       }}
       finalizarPedido={() => {
         console.log(`Pedido finalizado mesa ${mesaId}:`, pedidos);
-        // Aquí decides si borrar o no:
-        // Si quieres mantenerlos al regresar, comenta esta línea:
-        // localStorage.removeItem(`pedido_${mesaId}`);
-        // Si quieres borrarlos, descomenta la línea anterior.
-
+        
+        // Opción 1: Mantener pedidos (mesa sigue ocupada)
+        // No hacer nada, los pedidos se mantienen
+        
+        // Opción 2: Limpiar pedidos (mesa vuelve a libre)
+        // Descomenta las siguientes líneas si quieres limpiar:
+        // const pedidosVacios = [];
+        // setPedidos(pedidosVacios);
+        // actualizarEstadoMesaEnStorage(mesaId, pedidosVacios);
+        
+        // Por defecto, mantener los pedidos para que la mesa siga ocupada
+        // El usuario puede limpiar manualmente desde la vista principal
+        
         // Navegar de vuelta al home
         window.location.href = "/";
       }}

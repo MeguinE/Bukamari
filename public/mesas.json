@@ -1,12 +1,85 @@
 [
-  { "id": 1, "pedidos": [], "clientes": 2 },
-  { "id": 2, "pedidos": [], "clientes": 4 },
-  { "id": 3, "pedidos": [{ "producto": "Pizza", "precio": 20 }], "clientes": 1 },
-  { "id": 4, "pedidos": [], "clientes": 3 }, 
-  { "id": 5, "pedidos": [], "clientes": 5 },
-  { "id": 6, "pedidos": [], "clientes": 2 },
-  { "id": 7, "pedidos": [], "clientes": 1 },
-  { "id": 8, "pedidos": [], "clientes": 4 },
-  { "id": 9, "pedidos": [], "clientes": 3 },
-  { "id": 10, "pedidos": [], "clientes": 2 }
+  { 
+    "id": "T1", 
+    "pedidos": [], 
+    "clientes": 2, 
+    "estado": "libre",
+    "mesero": "Carlos"
+  },
+  { 
+    "id": "T2", 
+    "pedidos": [
+      { "producto": "Ensalada César", "precio": 12.50 },
+      { "producto": "Agua mineral", "precio": 3.00 }
+    ], 
+    "clientes": 4, 
+    "estado": "ocupada",
+    "mesero": "Ana"
+  },
+  { 
+    "id": "T3", 
+    "pedidos": [
+      { "producto": "Pizza Margherita", "precio": 18.00 },
+      { "producto": "Coca Cola", "precio": 2.50 }
+    ], 
+    "clientes": 1, 
+    "estado": "ocupada",
+    "mesero": "Luis"
+  },
+  { 
+    "id": "T4", 
+    "pedidos": [], 
+    "clientes": 3, 
+    "estado": "libre",
+    "mesero": "María"
+  },
+  { 
+    "id": "T5", 
+    "pedidos": [
+      { "producto": "Pasta Alfredo", "precio": 16.00 },
+      { "producto": "Pan de ajo", "precio": 4.50 },
+      { "producto": "Vino tinto", "precio": 8.00 }
+    ], 
+    "clientes": 5, 
+    "estado": "ocupada",
+    "mesero": "Carlos"
+  },
+  { 
+    "id": "T6", 
+    "pedidos": [], 
+    "clientes": 2, 
+    "estado": "reservada",
+    "mesero": "Ana"
+  },
+  { 
+    "id": "T7", 
+    "pedidos": [], 
+    "clientes": 1, 
+    "estado": "libre",
+    "mesero": "Luis"
+  },
+  { 
+    "id": "T8", 
+    "pedidos": [
+      { "producto": "Hamburguesa BBQ", "precio": 14.00 },
+      { "producto": "Papas fritas", "precio": 5.00 }
+    ], 
+    "clientes": 4, 
+    "estado": "ocupada",
+    "mesero": "María"
+  },
+  { 
+    "id": "T9", 
+    "pedidos": [], 
+    "clientes": 3, 
+    "estado": "limpieza",
+    "mesero": "Carlos"
+  },
+  { 
+    "id": "T10", 
+    "pedidos": [], 
+    "clientes": 2, 
+    "estado": "libre",
+    "mesero": "Ana"
+  }
 ]

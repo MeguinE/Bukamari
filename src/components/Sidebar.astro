@@ -1,11 +1,38 @@
-<aside class="animate-fade-in w-20 md:w-[140px] h-screen bg-white border-r flex flex-col items-center py-4 fixed left-0 top-0 z-20">
-  <div class="text-2xl font-bold mb-8">POS</div>
-  <nav class="flex flex-col justify-center gap-6 text-sm items-center">
+<!-- Aside lateral fijo que contiene el menú de navegación -->
+<aside 
+  class="animate-fade-in                   <!-- Animación de aparición -->
+         w-24 md:w-[140px]                 <!-- Ancho 24 en mobile, 140px en pantallas medianas en adelante -->
+         h-screen                          <!-- Altura completa de la pantalla -->
+         bg-white                          <!-- Fondo blanco -->
+         border-r                          <!-- Borde derecho para separación visual -->
+         flex flex-col items-center        <!-- Flexbox vertical, centrado horizontalmente -->
+         py-4                              <!-- Padding vertical -->
+         fixed left-0 top-0                <!-- Posición fija en esquina superior izquierda -->
+         z-10                              <!-- Z-index ajustado -->
+         transition-all duration-300 ease-in-out  <!-- Transición suave al mostrar/ocultar -->
+  ">
+
+  <!-- Cabecera del menú lateral -->
+  <header class="text-2xl font-bold mb-8">
+    POS
+  </header>
+
+  <!-- Navegación principal accesible -->
+  <nav role="navigation" aria-label="Menú principal" class="flex flex-col justify-center gap-6 text-sm items-center">
+    <!-- Enlace a Inicio -->
     <a href="/" class="text-green-600 font-semibold">🏠 Inicio</a>
+    <!-- Enlace al Menú -->
     <a href="/menu" class="text-green-600 font-semibold">📋 Menú</a>
-    <a href="/pago">💳 Pago</a>
-    <a href="/ordenes">📦 Órdenes</a>
-    <a href="/configuracion">⚙️ Configuración</a>
+    <!-- Enlace a Pago -->
+    <a href="/pago" class="text-green-600 font-semibold">💳 Pago</a>
+    <!-- Enlace a Órdenes -->
+    <a href="/ordenes" class="text-green-600 font-semibold">📦 Órdenes</a>
+    <!-- Enlace a Configuración -->
+    <a href="/configuracion" class="text-green-600 font-semibold">⚙️ Configuración</a>
   </nav>
-  <div class="mt-auto text-xs text-gray-400">v1.0</div>
+
+  <!-- Pie de página con versión de la aplicación -->
+  <footer class="mt-auto text-xs text-gray-400">
+    v1.0
+  </footer>
 </aside>
